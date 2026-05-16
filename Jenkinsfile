@@ -4,7 +4,7 @@ agent any
 
 tools
 {
-    jdk 'jdk'
+    jdk 'jdk-21'
     maven 'mymaven'
 }
 
