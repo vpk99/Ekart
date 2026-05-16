@@ -35,9 +35,9 @@ stages{
     stage('OWSAP'){
         steps{
              dependencyCheck additionalArguments: '--scan ./ --format XML',
-             odcInstallation: 'dependency-check'
+             odcInstallation: 'dp'
 
-            dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            dependencyCheckPublisher pattern: '**/dp-report.xml'
             
         }
     }
