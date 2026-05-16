@@ -10,7 +10,7 @@ tools
 
 environment
 {
-    SCANNER_HOME= tool 'sonar-scan'
+    SCANNER_HOME= tool 'sonar-scanner'
 }
 
 stages{
