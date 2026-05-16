@@ -24,7 +24,7 @@ stages{
     stage(sonar_analysis){
         steps{
             sh'''
-            $SCANNER_HOME/bin/sonar-scan -Dsonar.url=http://54.175.243.242:9000/ -Dsonar.login=squ_a99bf2bb78e79b01e5e71f49c86f9b1bef163fc1\
+            $SCANNER_HOME/bin/sonar-scanner -Dsonar.url=http://54.175.243.242:9000/ -Dsonar.login=squ_a99bf2bb78e79b01e5e71f49c86f9b1bef163fc1\
             -Dsonar.projectName=shopping_cart\
             -Dsonar.java.binaries=.\
             -Dsonar.projectkey=shopping_cart
