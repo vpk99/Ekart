@@ -12,7 +12,7 @@ tools
 
 stages{
 
-    stage('build'){
+    stage('compile'){
         steps{
             sh "mvn clean compile"
         }
@@ -29,6 +29,36 @@ stages{
             -Dsonar.java.binaries=.
             '''
 
+        }
+    }
+
+    stage('OWSAP'){
+        steps{
+             dependencyCheck additionalArguments: '--scan ./ --format XML',
+             odcInstallation: 'dependency-check'
+
+            dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            
+        }
+    }
+
+    stage('build'){
+        steps{
+            sh 'mvn clean install'
+        }
+
+    }
+
+    stage('Docker build&push'){
+        steps{
+            script{
+                  withDockerRegistry(credentialsId: 'dockerhub-creds', toolName: 'docker') {
+               sh "docker build -t shopping:latest -f docker/Dockerfile"
+               sh "docker tag shopping:latest vpk1999/shopping:latest"
+               sh "docker push vpk1999/shopping:latest"
+               
+               }
+            }
         }
     }
 }
