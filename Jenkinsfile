@@ -1,6 +1,6 @@
 pipeline
 {
-agent {label 'dev-server'}
+agent any
 
 tools
 {
