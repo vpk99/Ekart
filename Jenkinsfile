@@ -35,7 +35,7 @@ stages{
     stage('OWASP'){
         steps{
 
-             withCredentials([string(credentialsId: 'nvd_ip', variable: 'nvd_api_key')]) {
+             withCredentials([string(credentialsId: 'nvd_api', variable: 'nvd_api_key')]) {
 
             dependencyCheck(
              additionalArguments: "--scan ./ --format XML --nvdApiKey ${nvd_api_key}",
