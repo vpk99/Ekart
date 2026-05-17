@@ -1,6 +1,6 @@
 pipeline
 {
-agent {label 'dev-server'}
+agent any
 
 tools
 {
@@ -22,7 +22,7 @@ stages{
         steps{
             sh'''
              mvn sonar:sonar \
-            -Dsonar.host.url=http://23.20.113.82:9000 \
+            -Dsonar.host.url=http://35.173.228.159:9000 \
             -Dsonar.login=squ_e325604b23840e3fbdf607ee2525239c0b195b10\
             -Dsonar.projectKey=shopping_cart \
             -Dsonar.projectName=shopping_cart \
@@ -35,9 +35,9 @@ stages{
     stage('OWSAP'){
         steps{
              dependencyCheck additionalArguments: '--scan ./ --format XML',
-             odcInstallation: 'dp'
+             odcInstallation: 'dp-check'
 
-            dependencyCheckPublisher pattern: '**/dp-report.xml'
+            dependencyCheckPublisher pattern: '**/dependencycheck-report.xml'
             
         }
     }
