@@ -32,12 +32,16 @@ stages{
         }
     }
 
-    stage('OWSAP'){
+    stage('OWASP'){
         steps{
-             dependencyCheck additionalArguments: '--scan ./',
-             odcInstallation: 'dp-check'
 
-            dependencyCheckPublisher pattern: '**/dependencycheck-report.xml'
+             withCredentials([string(credentialsId: 'nvd_ip', variable: 'nvd_api_key')]) {
+
+            dependencyCheck(
+             additionalArguments: "--scan ./ --format XML --nvdApiKey ${nvd_api_key}",
+             odcInstallation: 'dp-check'
+    )
+}
             
         }
     }
