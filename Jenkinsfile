@@ -34,7 +34,7 @@ stages{
 
     stage('OWSAP'){
         steps{
-             dependencyCheck additionalArguments: '--scan ./ --format XML',
+             dependencyCheck additionalArguments: '--scan ./',
              odcInstallation: 'dp-check'
 
             dependencyCheckPublisher pattern: '**/dependencycheck-report.xml'
@@ -52,7 +52,7 @@ stages{
     stage('Docker build&push'){
         steps{
             script{
-                  withDockerRegistry(credentialsId: 'dockerhub-creds', toolName: 'docker') {
+                  withDockerRegistry(credentialsId: 'dockerhub-cred', toolName: 'docker') {
                sh "docker build -t shopping:latest -f docker/Dockerfile"
                sh "docker tag shopping:latest vpk1999/shopping:latest"
                sh "docker push vpk1999/shopping:latest"
